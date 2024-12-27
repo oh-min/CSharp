@@ -63,9 +63,12 @@ namespace BrainCSharp // => BrainCSharp 이란 이름의 네임스페이스 생�
 
             // chapter03 / Variable(), valueType()
             chapter03 chapter03 = new chapter03();
-            //  chapter03.Variable();
+            // chapter03.Variable();
             // chapter03.steackAndHeap();
-            chapter03.integralTypes();
+            // chapter03.integralTypes();
+            // chapter03.vitaminQuiz3_1();
+            // chapter03.numLiteral();
+            chapter03.secondsComplement();
         }
     }
 }
