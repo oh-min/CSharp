@@ -303,6 +303,72 @@ namespace chapter
         // double을 사용했는데에도 데이터 손실이 우려된다면 decimal 형식을 사용하면 됨
         // decimal의 한계마저 넘어서는 데이터를 처리해야 한다면, 그 때는 직접 그 데이터를 처리할 수 있는 알고리즘을 담은 복합 데이터 형식을 직접 작성해야 한다
 
-        
+        // 3.4.9 Deciaml 형식
+
+        // 실수를 다루는 데이터 형식. 부동 소수점과는 다른 방식으로 소수를 다루며 정밀도가 훨씬 높음
+        // Decimal 형식 : 29자리 데이터를 표현할 수 있는 소수 형식 / 16바이트(128비트) / ±1.0 x 10e-28 ~ ±7.9 x 10e28
+
+        public void decimalExample()
+        {
+            float a = 3.1415_9265_3589_7932_3846_2643_3832_79f; // f를 붙이면 float
+            double b = 3.1415_9265_3589_7932_3846_2643_3832_79; // 아무것도 없으면 double
+            decimal c = 3.1415_9265_3589_7932_3846_2643_3832_79m; // m을 붙이면 decimal
+
+            Console.WriteLine(a); // 3.1415927
+            Console.WriteLine(b); // 3.141592653589793
+            Console.WriteLine(c); // 3.1415926535897932384626433833
+        }
+
+        // 3.4.10 문자 형식과 문자열 형식
+
+        // char 형식 : 정수를 데이터 형식 출신이지만, 수가 아닌 '가', '나', '다', 'a', 'b', 'c'와 같은 문자 데이터를 다룬다
+        // 작은 따옴표(' ') 
+        // char a = '가';
+        // char b = 'a';
+
+        public void charExample()
+        {
+            char a = '안';
+            char b = '녕';
+            char c = '하';
+            char d = '세';
+            char e = '요';
+
+            Console.Write(a); // Write 메소드는 줄 바꿈 없다
+            Console.Write(b);
+            Console.Write(c);
+            Console.Write(d);
+            Console.Write(e);
+            Console.WriteLine(); // WriteLine 메소드는 출력 후 줄을 바꾼다
+
+            // 안녕하세요
+        }
+
+        // string 형식 (문자열) : 여러 개의 문자 형식을 하나로 묶어서 처리하는 형식. 정해진 크기나 담을 수 있는 데이터의 범위가 정해지지 않는다
+        // 변수가 담는 텍스트의 양에 따라 그 크기가 달라짐
+        // 큰 따옴표(" ")
+        // string a = "안녕하세요?";
+        // string b = "반갑습니다.";
+
+        public void stringExample()
+        {
+            string a = "안녕하세요?";
+            string b = "반갑습니다.";
+
+            Console.WriteLine(a); // 안녕하세요?
+            Console.WriteLine(b); // 반갑습니다.
+        }
+
+        public void vitaminQuiz3_3()
+        {
+            // char a = "안"; // Error : " 사용
+            // char b = '안녕'; // Error : 여러 개 문자
+            char c = '안';
+
+            //  string d = '안'; // Error : ' 사용
+            //   string e = '안녕'; // Error : ' 사용
+            string f = "안녕";
+
+        }
     }
 }

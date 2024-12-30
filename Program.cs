@@ -71,7 +71,10 @@ namespace BrainCSharp // => BrainCSharp 이란 이름의 네임스페이스 생�
             // chapter03.secondsComplement();
             // chapter03.overflow();
             // chapter03.vitaminQuiz3_2();
-            chapter03.precision();
+            // chapter03.precision();
+            // chapter03.decimalExample();
+            // chapter03.charExample();
+            chapter03.stringExample();
         }
     }
 }
