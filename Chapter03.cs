@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Dynamic;
+using System.Xml.XPath;
 
 namespace chapter
 {
@@ -370,5 +371,87 @@ namespace chapter
             string f = "안녕";
 
         }
+
+        // 3.4.11 논리 형식
+
+        // 논리 형식(Boolean Type) : 참(True), 거짓(False) / 1바이트(8비트)
+        // 어떤 작업이 성공했는지(True) 실패했는지(False), 두 비교 데이터가 같은 지(True) 다른지(False)를 판단할 때 등 사용됨
+
+        // boolean 형식이 없을 경우
+        // if ( result == 0 )
+        //      1번 작업을 합니다
+        // else
+        //      2번 작업을 합니다
+        // 코드를 읽는 사람 입장에서는 사용된 0이 숫자 0인지 거짓 0을 의미하는지 헷갈린다
+
+        public void booleanExample()
+        {
+            bool a = true;
+            bool b = false;
+
+            Console.WriteLine(a); // True
+            Console.WriteLine(b); // False
+        }
+
+        // 3.4.12 object 형식
+
+        // object 형식 : 어떤 데이터든지 다룰 수 있는 데이터 형식
+        // '상속'의 효과 덕분에 다른 형식의 데이터도 담을 수 있다
+        // 상속 : 부모 데이터 형식의 유산을 자식이 물려받는 것. 부모로부터 데이터와 메소드를 물려받은 자식은 부모와 똑같이 동작할 수 있다.
+
+        public void objectExample()
+        {
+            object a = 123;
+            object b = 3.141592653589793238462643383279m;
+            object c = true;
+            object d = "안녕하세요.";
+
+            Console.WriteLine(a); // 123
+            Console.WriteLine(b); // 3.1415926535897932384626433833
+            Console.WriteLine(c); // True
+            Console.WriteLine(d); // 안녕하세요.
+        }
+
+        // 정수 형식은 부호 있는 형식과 부호 없는 형식을 처리하는 방식이 서로 다르고, 부동 소수점 형식과 decimal 형식이 서로 소수를 처리하는 방식이 다른데 말이다.
+        // 이 뒤에 일어나는 메커니즘은 박싱과 언박싱을 이해해야한다
+
+        // 3.4.13 박싱과 언박싱
+
+        // object 형식을 참조 형식이기 때문에 힙에 데이터를 할당한다
+        // int 형식이나 double 형식은 값 형식이기 때문에 스택에 데이터를 할당한다
+        // 그럼 값 형식의 데이터를 object 형식 객체에 담으면 스택?힙? 어느 메모리에 데이터가 할당되는 건가?
+
+        // object 형식은 값 형식의 데이터를 힙에 할당하기 위한 "박싱(Boxing)"기능을 제공한다
+        // object 형식에 값 형식의 데이터 할당하려는 시도 -> object 형식을 박싱 수행 -> 해당 데이터를 힙에 할당
+
+        // object a = 20;
+        // 20은 박스에 담긴채 힙에 저장된다
+
+        // 힙에 있던 값 형식 데이터를 값 형식 객체에 다시 할당해야 하는 경우
+        // object a = 20;
+        // int b = (int)a;
+        // a는 20이 박싱되어 저장되어 있는 힙을 참조하고 있다
+        // b는 a가 참조하고 있는 메모리로부터 값을 복사하려고 하는 중이다
+        // 언박싱(Unboxing) : 박싱되어 있는 값을 꺼내 값 형식 변수에 저장하는 과정을 일컬어서 말한다
+
+        public void boxingUnboxing()
+        {
+            int a = 123;
+            object b = (object)a; // a에 담긴 값을 박싱해서 힙에 저장
+            int c = (int)b; // b에 담긴 값을 언박싱해서 스택에 저장
+
+            Console.WriteLine(a); // 123
+            Console.WriteLine(b); // 123
+            Console.WriteLine(c); // 123
+
+            double x = 3.1414213;
+            object y = x; // x에 담긴 값을 박싱해서 힙에 저장. object 형식에 저장할 때 형식 변환연산자를 지정하지 않으면 암시적으로 object 형식으로 변환된다
+            double z = (double)y; // y에 담긴 값을 언박싱해서 스택에 저장
+
+            Console.WriteLine(x); // 3.1414213
+            Console.WriteLine(y); // 3.1414213
+            Console.WriteLine(z); // 3.1414213
+        }
+
     }
 }
