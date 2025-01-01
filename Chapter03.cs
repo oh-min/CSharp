@@ -453,5 +453,141 @@ namespace chapter
             Console.WriteLine(z); // 3.1414213
         }
 
+        // 3.4.14 데이터 형식 바꾸기
+
+        // 형식 변환(Type Conversion) : 변수를 다른 데이터 형식의 변수에 옮겨 담는 것
+        // 박싱과 언박싱 또한 형식 변환이라고 할 수 있다
+
+        // 1) 크기(표현 범위)가 서로 다른 정수 형식 사이의 변환
+        // 2) 크기(표현 범위)가 서로 다른 부동 소수점 형식 사이의 변환
+        // 3) 부호 있는 정수 형식과 부호 없는 정수 형식 사이의 변환
+        // 4) 부동 소수점 형식과 정수 형식 사이의 변환
+        // 5) 문자열과 숫자 사이의 변환
+
+        // 3.4.15 크기가 서롱 다른 정수 형식 사이의 변환
+
+        // '용량'의 차이 때문에 문제가 발생
+        // 작은 정수 형식의 변수에 있는 데이터 -> 큰 정수 형식의 변수로 옮길 때 문제 X 
+        // but 반대의 경우(큰 -> 작은) 오버 플로우 발생
+        // 물론, 큰 형식의 변수로부터옮겨오는 데이터가 작은 형식의 변수가 담을 수 있는 크기라면 문제 X
+
+        // 예제 : 1바이트 크기의 sbyte 형식과 4바이트 크기의 int 형식 사이의 형식 변환(※ int -> sbyte)
+        public void integralConversion()
+        {
+            sbyte a = 127;
+            Console.WriteLine(a); // 127
+
+            int b = (int)a;
+            Console.WriteLine(b); // 127
+
+            int x = 128; // sbyte의 최대값 127보다 큰 수
+            Console.WriteLine(x); // 128
+
+            sbyte y = (sbyte)x; // 오버플로우 발생
+            Console.WriteLine(y); // - 128
+        }
+
+        // 3.4.16 크기가 서로 다른 부동 소수점 형식 사이의 변환
+
+        // 부동 소수점 형식의 특성상 오버플로우가 존재하지 않는다 but 정밀성에 손상을 입는다
+        // float 이나 double은 소수를 이진수로 메모리에 보관
+        // 이것을 다른 형식으로 변환 하려면 10진수로 복원 후 -> 다시 이진수로 변환해서 기록하게 된다
+        // 문제는 이진수로 표현하는 소수가 완전하지 않는다는 데 있다. 1/3 같은 수는 0.3333... 의 무한 소수가 된다
+        // 따라서 정밀한 수를 다뤄야 하는 프로그램에서 float와 double 사이의 형식 변환을 시도할 때에는 주의를 기울여야 한다
+
+        public void floatingConversion()
+        {
+            float a = 69.6875f;
+            Console.WriteLine("a : {0}", a); // a : 69.6875
+
+            double b = (double)a;
+            Console.WriteLine("b : {0}", b); // b : 69.6875
+
+            Console.WriteLine("69.6875 == b : {0}", 69.6875 == b); // 69.6875 == b : True
+
+            float x = 0.1f;
+            Console.WriteLine("x : {0}", x); //x : 0.1
+
+            double y = (double)x;
+            Console.WriteLine("y : {0}", y); // y : 0.10000000149011612
+
+            Console.WriteLine("0.1 == y : {0}", 0.1 == y); // 0.1 == y : False
+        }
+
+        // 3.4.17 부호 있는 정수 형식과 부호 없는 정수 형식 사이의 변환
+        public void unsignedConversion()
+        {
+            int a = 500;
+            Console.WriteLine(a); // 500
+
+            uint b = (uint)a;
+            Console.WriteLine(b); // 500
+
+            int x = -30;
+            Console.WriteLine(x); // -30
+
+            uint y = (uint)x;
+            Console.WriteLine(y); // 4294967266
+        }
+
+        // 3.4.18 부동 소수점 형식과 정수 형식 사이의 변환
+
+        // 부동 소수벙 형식 -> 정수 형식 : 소수점 아래는 버리고 소수점 위의 값만 남긴다
+        // 0.9 -> 0 / 0.1 -> 0
+
+        public void floatToIntConversion()
+        {
+            float a = 0.9f;
+            int b = (int)a;
+            Console.WriteLine(b); // 0
+
+            float c = 1.1f;
+            int d = (int)c;
+            Console.WriteLine(d); // 1
+        }
+
+        // 3.4.19 문자열을 숫자로, 숫자를 문자열로
+
+        // "12345"는 문자열이고, 따옴표가 없는 12345는 숫자이다
+        // 문자열을 숫자로 바꾸려면 지금까지 했던것 처럼 변호나 연산자를 이용하면
+
+        // string a = "12345";
+        // int b = (int)a;
+
+        // int c = 12345;
+        // string d = (string)c;
+
+        // 그러나 위 코드들은 컴파일 되지 않는다
+
+        // 문자열 -> 숫자 사이의 형식 변환은 다른 방법을 사용하여야 한다
+        // 정수 계열 형식, 부동 소수점 형식은 "Parse()"라는 메소드 가진다. 이 메소드는 숫자로 변환할 문자열을 넘기면 숫자로 변환해 준다
+        // int a = int.Parse("12345");
+        // float b = float.Parse("12345");
+
+        // 숫자 -> 문자열
+        // 정수 계열 데이터 형식이나 부동 수수점 데이터 형식은 object로부터 물려받은 "ToString()" 메소드를 자신이 갖고 있는 수자를 분자열로 변환하도록 했다(오버라이드)
+        // int c = 12345;
+        // string d = c.ToString();
+        // float e = 123.45;
+        // string f = e.ToString();
+
+        public void stringToNumConversion()
+        {
+            int a = 123;
+            string b = a.ToString();
+            Console.WriteLine(b); // 123
+
+            float c = 3.14f;
+            string d = c.ToString();
+            Console.WriteLine(d); // 3.14
+
+            string e = "123456";
+            int f = Convert.ToInt32(e);
+            Console.WriteLine(f); // 123456
+
+            string g = "1.2345";
+            float h = float.Parse(g);
+            Console.WriteLine(h); // 1.2345
+        }
     }
 }

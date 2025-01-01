@@ -77,7 +77,12 @@ namespace BrainCSharp // => BrainCSharp 이란 이름의 네임스페이스 생�
             // chapter03.stringExample();
             // chapter03.booleanExample();
             // chapter03.objectExample();
-            chapter03.boxingUnboxing();
+            // chapter03.boxingUnboxing();
+            // chapter03.integralConversion();
+            // chapter03.floatingConversion();
+            // chapter03.unsignedConversion();
+            // chapter03.floatToIntConversion();
+            chapter03.stringToNumConversion();
         }
     }
 }
